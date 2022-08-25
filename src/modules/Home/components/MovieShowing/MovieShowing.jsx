@@ -1,7 +1,34 @@
-const MovieShowing = () => {
-  return (
-    <div>MovieShowing</div>
-  )
-}
+import { useNavigate } from "react-router-dom";
 
-export default MovieShowing
+import useRequest from "hooks/useRequest";
+import movieAPI from "apis/movieAPI";
+
+const MovieShowing = () => {
+  // useNavigate là một hook dùng để điều hướng url
+  const navigate = useNavigate();
+
+  const {
+    data: movies,
+    isLoading,
+    error,
+  } = useRequest(() => movieAPI.getMovies());
+
+  const goToMovie = (movieId) => {
+    navigate(`/movie/${movieId}`);
+  };
+
+  return (
+    <ul>
+      {movies?.map((movie) => {
+        return (
+          <li key={movie.maPhim}>
+            <span>{movie.tenPhim}</span>
+            <button onClick={() => goToMovie(movie.maPhim)}>Chi tiết</button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+export default MovieShowing;

@@ -3,6 +3,7 @@ Libraries:
 - API: axios
 - Router: react-router-dom
 - State management: @reduxjs/toolkit, react-redux
+- Form management: react-hook-form
 
 Structure project:
 
@@ -24,5 +25,7 @@ Structure project:
       - slices/: Chứa các redux slices
 
   - apis/: Setup axios, và các hàm gọi API
+
+  - hooks/: Chứa các custom hooks
 
   - store.ts: Setup redux store

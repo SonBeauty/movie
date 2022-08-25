@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 // Setup các cấu hình mặc định cho axios
 const axiosClient = axios.create({
@@ -19,7 +19,7 @@ axiosClient.interceptors.response.use(
     return response.data.content;
   },
   // thất bại
-  (error: AxiosError) => {
+  (error) => {
     // Ta có thể thay đổi error trước khi error được trả ra cho nơi gọi request.
     Promise.reject(error.response?.data.content);
   }

@@ -12,6 +12,14 @@ const movieAPI = {
   getBanners: () => {
     return axiosClient.get("QuanLyPhim/LayDanhSachBanner");
   },
+
+  getMovieDetails: (movieId) => {
+    return axiosClient.get("QuanLyPhim/LayThongTinPhim", {
+      params: {
+        maPhim: movieId,
+      },
+    });
+  },
 };
 
 export default movieAPI;
