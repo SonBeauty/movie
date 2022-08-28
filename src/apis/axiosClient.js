@@ -21,7 +21,7 @@ axiosClient.interceptors.response.use(
   // thất bại
   (error) => {
     // Ta có thể thay đổi error trước khi error được trả ra cho nơi gọi request.
-    Promise.reject(error.response?.data.content);
+    return Promise.reject(error.response?.data.content);
   }
 );
 

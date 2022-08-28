@@ -1,5 +1,8 @@
-import React from "react";
+import authAPI from "apis/authAPI";
+import useRequest from "hooks/useRequest";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { notification } from "antd";
 
 // data: taiKhoan, matKhau, email, hoTen, soDt
 
@@ -19,9 +22,25 @@ const Register = () => {
     // Chế độ kích hoạt validation, mặc định là onSubmit
     mode: "onTouched",
   });
+  const navigate = useNavigate();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const { data: handleRegister, isLoading } = useRequest(
+    (values) => authAPI.register(values),
+    { isManual: true }
+  );
+
+  const onSubmit = async (values) => {
+    try {
+      await handleRegister(values);
+      // Sau khi đăng ký thành công, ta cần chuyển user về trang login
+      navigate("/login");
+    } catch (error) {
+      // Đăng ký thất bại show error ra cho user thấy
+      notification.error({
+        message: "Đăng ký thất bại",
+        description: error,
+      });
+    }
   };
 
   const onError = (error) => {
