@@ -1,8 +1,10 @@
 import { Button, Form, Input, notification } from "antd";
-import authAPI from "apis/authAPI";
-import useRequest from "hooks/useRequest";
+// import authAPI from "apis/authAPI";
+// import useRequest from "hooks/useRequest";
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../slices/authSlice";
 
 const Login = () => {
   const {
@@ -18,19 +20,37 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((state) => state.auth);
 
-  const { data: handleLogin, isLoading } = useRequest(
-    (values) => authAPI.login(values),
-    {
-      isManual: true,
-    }
-  );
+  // const { data: handleLogin, isLoading } = useRequest(
+  //   (values) => authAPI.login(values),
+  //   {
+  //     isManual: true,
+  //   }
+  // );
+  // const onSubmit = async (values) => {
+  //   try {
+  //     const data = await handleLogin(values);
+  //     // Thành công lưu thông tin đăng nhập vào localStorage
+  //     localStorage.setItem("user", JSON.stringify(data));
+  //     // Chuyển user về trang home
+  //     navigate("/");
+  //     notification.success({
+  //       message: "Đăng nhập thành công",
+  //     });
+  //   } catch (error) {
+  //     notification.error({
+  //       message: "Đăng nhập thất bại",
+  //       description: error,
+  //     });
+  //   }
+  // };
 
   const onSubmit = async (values) => {
     try {
-      const data = await handleLogin(values);
-      // Thành công lưu thông tin đăng nhập vào localStorage
-      localStorage.setItem("user", JSON.stringify(data));
+      // chờ cho action login thành công
+      await dispatch(login(values)).unwrap();
       // Chuyển user về trang home
       navigate("/");
       notification.success({
@@ -43,6 +63,11 @@ const Login = () => {
       });
     }
   };
+
+  // Đã đăng nhập
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>

@@ -1,7 +1,10 @@
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CheckoutRoute = ({ children }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  // Logic kiểm tra xem user có được truy cập vào route hay không
+  // const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useSelector((state) => state.auth);
 
   // Chưa đăng nhập, điều hướng user về trang login
   if (!user) {

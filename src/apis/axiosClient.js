@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store";
 
 // Setup các cấu hình mặc định cho axios
 const axiosClient = axios.create({
@@ -10,6 +11,18 @@ const axiosClient = axios.create({
 });
 
 // interceptors
+axiosClient.interceptors.request.use((config) => {
+  // config: nội dung request gửi lên server
+  // ta sẽ thay đổi headers trong request trước khi nó được gửi lên server
+  const { accessToken } = store.getState().auth.user || {};
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
+});
+
 axiosClient.interceptors.response.use(
   // thành công
   (response) => {
