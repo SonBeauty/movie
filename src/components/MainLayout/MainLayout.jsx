@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 
 import Header from "../Header";
+import Footer from "components/footer/Footer";
 
 const MainLayout = () => {
   return (
@@ -17,8 +18,7 @@ const MainLayout = () => {
         <Outlet />
       </Layout.Content>
       <Layout.Footer>
-        <h1>My Footer</h1>
-        {/* <Footer /> */}
+        <Footer/>
       </Layout.Footer>
     </Layout>
   );

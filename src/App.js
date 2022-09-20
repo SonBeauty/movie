@@ -1,3 +1,5 @@
+
+
 import { lazy, Suspense } from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 
@@ -16,6 +18,8 @@ const Home = lazy(() => import("modules/Home/pages/Home"));
 const Movie = lazy(() => import("modules/Movie/pages/Movie"));
 const Login = lazy(() => import("modules/Authentication/pages/Login"));
 const Register = lazy(() => import("modules/Authentication/pages/Register"));
+const Trailer = lazy(() => import("components/trailer/Trailer"));
+const Ticket = lazy(()=>import("modules/Ticket/Ticket"))
 
 const MovieList = lazy(() => import("modules/AdminMovie/pages/MovieList"));
 const AddMovie = lazy(() => import("modules/AdminMovie/pages/AddMovie"));
@@ -51,6 +55,7 @@ function App() {
           {/* index: path của child route khớp 100% với path của parent route */}
           <Route index element={<Home />} />
           <Route path="movie/:movieId" element={<Movie />} />
+          <Route path="ticket/:ticketId" element={<Ticket />} />
           <Route
             path="checkout/:checkoutId"
             element={
@@ -65,6 +70,7 @@ function App() {
         <Route path="/" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="trailer" element={<Trailer />} />
         </Route>
       </Routes>
     </Suspense>

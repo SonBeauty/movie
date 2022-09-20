@@ -4,7 +4,7 @@ const movieAPI = {
   getMovies: () => {
     return axiosClient.get("QuanLyPhim/LayDanhSachPhim", {
       params: {
-        maNhom: "GP01",
+        maNhom: "GP05",
       },
     });
   },
@@ -21,6 +21,31 @@ const movieAPI = {
     });
   },
 
+  getLichChieu: (movieId) => {
+    return axiosClient.get("QuanLyRap/LayThongTinLichChieuPhim", {
+      params: {
+        maPhim: movieId
+      }
+    })
+  },
+
+  getCinema: () => {
+    return axiosClient.get("QuanLyRap/LayThongTinHeThongRap")
+  },
+  getCinemaDetails: (cinemaId) => {
+    return axiosClient.get("QuanLyRap/LayThongTinCumRapTheoHeThong", {
+      params: {
+        maHeThongRap: cinemaId,
+      }
+    })
+  },
+  getTicket: (ticketid) => {
+    return axiosClient.get("QuanLyDatVe/LayDanhSachPhongVe", {
+      params: {
+        MaLichChieu: ticketid
+      }
+    })
+  },
   addMovie: (movie) => {
     // Đối với dữ liệu có định dạng đặc biệt như File,...
     // Ta cần phải tạo ra FormData để lưu trữ
@@ -29,7 +54,7 @@ const movieAPI = {
     for (let key in movie) {
       formData.append(key, movie[key]);
     }
-    formData.append("maNhom", "GP01");
+    formData.append("maNhom", "GP05");
 
     return axiosClient.post("QuanLyPhim/ThemPhimUploadHinh", formData);
   },
