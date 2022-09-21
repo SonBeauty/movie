@@ -33,7 +33,7 @@ const movieAPI = {
     return axiosClient.get("QuanLyRap/LayThongTinHeThongRap")
   },
   getCinemaDetails: (cinemaId) => {
-    return axiosClient.get("QuanLyRap/LayThongTinCumRapTheoHeThong", {
+    return axiosClient.get("QuanLyRap/LayThongTinLichChieuHeThongRap", {
       params: {
         maHeThongRap: cinemaId,
       }

@@ -42,7 +42,6 @@ const Banner = () => {
     isLoading,
     error,
   } = useRequest(() => movieAPI.getBanners());
-  console.log(banners);
   const bannersMapped = banners?.map((banner, index) => {
     return { ...banner, trailer: TRAILERS[index] };
   });
@@ -55,7 +54,6 @@ const Banner = () => {
     <div className="alo">
       <Slide>
         {banners.map((banner, index) => {
-          console.log(index);
 
           return (
             <>
