@@ -16,7 +16,7 @@ const Cinema = () => {
 
   const cinemaDetail = (cinemaId) => {
     setCinemaDetails(cinemaId);
-    setDisplay(true)
+    setDisplay(true);
   };
   // useEffect(()=>{
   //   if(cinemaDetails){
@@ -34,21 +34,22 @@ const Cinema = () => {
             return (
               <div key={cinema.maHeThongRap}>
                 <div className="container">
-                  <div className="cinemalogo">
-                    <img
-                      src={cinema.logo}
-                      alt=""
-                      srcset=""
-                      onClick={() => cinemaDetail(cinema.maHeThongRap)}
-                    />
+                  <div
+                    className="cinemalogo"
+                    onClick={() => cinemaDetail(cinema.maHeThongRap)}
+                  >
+                    <img src={cinema.logo} alt="" srcset="" />
+                    <button className="btn btn-outline-warning">
+                      Chi tiết
+                    </button>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
+        {displayDetails && <CinemaDetail cinema={cinemaDetails} />}
       </CinemaStyle>
-      {displayDetails && <CinemaDetail cinema={cinemaDetails} />}
 
       {/* <CinemaDetail cinema={cinemaDetails}/> */}
     </div>
@@ -59,7 +60,8 @@ export default Cinema;
 const CinemaStyle = styled.div`
   background-image: url("https://img.freepik.com/free-vector/open-clapper-board-with-film-strip-background-design_1017-26102.jpg?w=2000");
   background-size: cover;
-
+  display: flex;
+  padding-left: 150px;
   .cinema-real {
     padding-top: 130px;
     padding-bottom: 130px;

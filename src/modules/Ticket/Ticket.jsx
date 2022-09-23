@@ -29,6 +29,7 @@ const Ticket = () => {
     const newSelect = selectChair.concat(chair);
     setSelectChair(newSelect);
   };
+  console.log(ticket)
   let total = 0;
   return (
     <div className="all">
