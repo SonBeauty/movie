@@ -56,7 +56,7 @@ const CinemaDetail = ({ cinema }) => {
   // const cine = cinemaInfo.tenCumRap
   // console.log(cine)
   return (
-    <div>
+    <div className="cinemaDetail">
       <table className="table">
         {data.map((cine) => {
           return (
